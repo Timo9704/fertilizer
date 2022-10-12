@@ -20,6 +20,10 @@ public class Aquarium {
 
     int[] fertilizerInUse = null;
 
+    public int getLiter() {
+        return liter;
+    }
+
     public double getNitratIs1() {
         return nitratIs1;
     }
