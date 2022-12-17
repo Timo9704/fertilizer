@@ -1,11 +1,8 @@
 package de.aquaristik.kosmos.fertilizerService.fertilizer;
 
-import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class FertilizerController {
-    DecimalFormat df = new DecimalFormat("###.##");
-
 
     private Fertilizer fertilizer;
 
@@ -21,7 +18,6 @@ public class FertilizerController {
     }
 
     public double calculateNpkDose(double[] consumption){
-        double ml = 0.5;
         double[] nutrientArray = new double[3];
 
         double nOptimal = consumption[0] / fertilizer.getNitrat();
@@ -34,8 +30,6 @@ public class FertilizerController {
 
         Arrays.sort(nutrientArray);
 
-
-
         return Math.round(nutrientArray[2] * 10.0) / 10.0;
     }
 
@@ -44,39 +38,4 @@ public class FertilizerController {
 
         return Math.round(feOptimal * 10.0) / 10.0;
     }
-
-    public boolean npkIsInPuffer(double nValue, double pValue, double kValue, double[] optimal) {
-
-        double nMin = optimal[0]*0.9;
-        double nMax = optimal[0]*1.05;
-        double pMin = optimal[1]*0.9;
-        double pMax = optimal[1]*1.05;
-        double kMin = optimal[2]*0.9;
-        double kMax = optimal[2]*1.05;
-        System.out.println(nValue);
-        System.out.println(pValue);
-        System.out.println(kValue);
-        System.out.println(optimal[0]);
-
-
-        int counter = 0;
-
-        if(nValue > nMin && nValue < nMax){
-            counter++;
-        }
-        if(pValue > pMin && pValue < pMax){
-            counter++;
-        }
-        if(kValue > kMin && kValue < kMax){
-            counter++;
-        }
-
-        System.out.println(counter);
-
-        return counter >= 2 ? true : false;
-    }
-
-
-
-
 }

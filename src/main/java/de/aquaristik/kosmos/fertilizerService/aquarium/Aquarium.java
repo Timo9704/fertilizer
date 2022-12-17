@@ -15,9 +15,6 @@ public class Aquarium {
     private double eisenIs1 = 0;
     private double eisenIs2 = 0;
 
-    private double magnesiumIs1 = 0;
-    private double magnesiumIs2 = 0;
-
     int[] fertilizerInUse = null;
 
     public int getLiter() {
@@ -56,28 +53,8 @@ public class Aquarium {
         return eisenIs2;
     }
 
-    public double getMagnesiumIs1() {
-        return magnesiumIs1;
-    }
-
-    public double getMagnesiumIs2() {
-        return magnesiumIs2;
-    }
-
     public int[] getFertilizerInUse() {
         return fertilizerInUse;
     }
 
-    public double getIs(String nutrient) {
-        if (nutrient == "Nitrat"){
-            return getNitratIs1();
-        } else if (nutrient == "Phosphat"){
-            return getPhosphatIs1();
-        } else if (nutrient == "Kalium") {
-            return getKaliumIs1();
-        } else if (nutrient == "Eisen") {
-            return getEisenIs1();
-        }
-        return 0;
-    }
 }

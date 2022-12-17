@@ -1,96 +1,74 @@
 package de.aquaristik.kosmos.fertilizerService.fertilizer;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "fertilizer")
 public class Fertilizer {
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long id;
 
-        private String name;
+    private String name;
 
-        private String hersteller;
+    private double nitrat;
 
-        private double nitrat;
+    private double phosphat;
 
-        private double phosphat;
+    private double kalium;
 
-        private double kalium;
+    private double eisen;
 
-        private double eisen;
+    private double magnesium;
 
-        private double magnesium;
+    public String getName() {
+        return name;
+    }
 
+    public double getNitrat() {
+        return nitrat;
+    }
 
-        public long getId() {
-                return id;
-        }
+    public double getPhosphat() {
+        return phosphat;
+    }
 
-        public void setId(long id) {
-                this.id = id;
-        }
+    public double getKalium() {
+        return kalium;
+    }
 
-        public double getNitrat() {
-                return nitrat;
-        }
+    public double getEisen() {
+        return eisen;
+    }
 
-        public void setNitrat(double nitrat) {
-                this.nitrat = nitrat;
-        }
+    public double getMagnesium() {
+        return magnesium;
+    }
 
-        public double getPhosphat() {
-                return phosphat;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setPhosphat(double phosphat) {
-                this.phosphat = phosphat;
-        }
+    public void setNitrat(double nitrat) {
+        this.nitrat = nitrat;
+    }
 
-        public double getKalium() {
-                return kalium;
-        }
+    public void setPhosphat(double phosphat) {
+        this.phosphat = phosphat;
+    }
 
-        public void setKalium(double kalium) {
-                this.kalium = kalium;
-        }
+    public void setKalium(double kalium) {
+        this.kalium = kalium;
+    }
 
-        public double getEisen() {
-                return eisen;
-        }
+    public void setEisen(double eisen) {
+        this.eisen = eisen;
+    }
 
-        public void setEisen(double eisen) {
-                this.eisen = eisen;
-        }
+    public void setMagnesium(double magnesium) {
+        this.magnesium = magnesium;
+    }
 
-        public double getMagnesium() {
-                return magnesium;
-        }
+    public Fertilizer(String name, double nitrat, double phosphat, double kalium, double eisen, double magnesium) {
+        this.name = name;
+        this.nitrat = nitrat;
+        this.phosphat = phosphat;
+        this.kalium = kalium;
+        this.eisen = eisen;
+        this.magnesium = magnesium;
+    }
 
-        public void setMagnesium(double magnesium) {
-                this.magnesium = magnesium;
-        }
-
-        public String getName() { return name; }
-
-        public void setName(String name) { this.name = name; }
-
-        public String getHersteller() { return hersteller; }
-
-        public void setHersteller(String hersteller) { this.hersteller = hersteller; }
-
-        public Fertilizer() {
-        }
-
-        public Fertilizer(Fertilizer fert){
-               this.id = fert.id;
-               this.name = fert.name;
-               this.hersteller = fert.hersteller;
-               this.nitrat = fert.nitrat;
-               this.phosphat = fert.phosphat;
-               this.kalium = fert.kalium;
-               this.eisen = fert.eisen;
-               this.magnesium = fert.magnesium;
-        }
 }

@@ -5,119 +5,70 @@ import de.aquaristik.kosmos.fertilizerService.aquarium.Aquarium;
 import de.aquaristik.kosmos.fertilizerService.aquarium.AquariumController;
 import de.aquaristik.kosmos.fertilizerService.fertilizer.Fertilizer;
 import de.aquaristik.kosmos.fertilizerService.fertilizer.FertilizerController;
-import de.aquaristik.kosmos.fertilizerService.fertilizer.FertilizerRepository;
-import de.aquaristik.kosmos.fertilizerService.nutrient.NutrientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
 
 
 @RestController
 public class AppController {
 
-    @Autowired
-    private final FertilizerRepository fertilizerRepo;
+    Fertilizer npk_power;
 
-    @Autowired
-    private final NutrientRepository nutrientRepository;
+    Fertilizer eisen_power;
 
-    public AppController(FertilizerRepository fertilizerRepo, NutrientRepository nutrientRepository) {
-        this.fertilizerRepo = fertilizerRepo;
-        this.nutrientRepository = nutrientRepository;
-    }
-
-    @GetMapping("getAllFertilizer")
-    public ResponseEntity getAllFertilizer() {
-
-        return ResponseEntity.ok(fertilizerRepo.findAll());
-    }
 
     @PostMapping(value = "/consumption")
-    public ResponseEntity consumption(@RequestBody String jsonString) throws IOException {
-
+    public ResponseEntity consumption(@RequestBody String jsonString) {
+        initialize();
         Gson gson = new Gson();
         Aquarium aquarium = gson.fromJson(jsonString, Aquarium.class);
         AquariumController aquariumController = new AquariumController(aquarium);
 
         double[] consumptionArray = aquariumController.consumption();
 
-        Fertilizer npk = new Fertilizer(fertilizerRepo.findByName("NPK Power"));
-        Fertilizer eisen = new Fertilizer(fertilizerRepo.findByName("Eisen Power"));
+        FertilizerController npk_power_controller = new FertilizerController(npk_power);
+        FertilizerController eisen_power_controller = new FertilizerController(eisen_power);
 
-        FertilizerController npkController = new FertilizerController(npk);
-        FertilizerController eisenController = new FertilizerController(eisen);
+        npk_power_controller.calculateForAquarium(aquarium.getLiter());
+        eisen_power_controller.calculateForAquarium(aquarium.getLiter());
 
-        npkController.calculateForAquarium(aquarium.getLiter());
-        eisenController.calculateForAquarium(aquarium.getLiter());
+        double[] array = new double[6];
 
-        double npkMl = npkController.calculateNpkDose(consumptionArray);
-        double feMl = eisenController.calculateFeDose(consumptionArray);
+        array[0] = consumptionArray[0];
+        array[1] = consumptionArray[1];
+        array[2] = consumptionArray[2];
+        array[3] = consumptionArray[3];
+        array[4] = npk_power_controller.calculateNpkDose(consumptionArray);
+        array[5] = eisen_power_controller.calculateFeDose(consumptionArray);
 
-
-        return ResponseEntity.ok(sendHtml(consumptionArray, feMl, npkMl));
+        return ResponseEntity.ok(sendResponse(array));
     }
 
-    public String sendHtml(double[] consumptionArray, double feMl, double npkMl){
+    public String sendResponse(double[] consumptionArray){
 
-        String html=
-                "<!DOCTYPE html>\n" +
-                        "<html>\n" +
-                        "<style>\n" +
-                        "table, th, td {\n" +
-                        "  border:1px solid black;\n" +
-                        "}\n" +
-                        "</style>\n" +
-                        "<body>\n" +
-                        "\n" +
-                        "<h2>Tagesverbrauch</h2>\n" +
-                        "\n" +
-                        "<table style=\"width:25%\">\n" +
-                        "  <tr>\n" +
-                        "    <th>Nährstoff</th>\n" +
-                        "    <th>Tagesverbrauch in mg/l</th>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Nitrat</td>\n" +
-                        "    <td>" + consumptionArray[0] + "</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Phosphat</td>\n" +
-                        "    <td>" + consumptionArray[1] + "</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Kalium</td>\n" +
-                        "    <td>" + consumptionArray[2] + "</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Eisen</td>\n" +
-                        "    <td>" + consumptionArray[3] + "</td>\n" +
-                        "  </tr>\n" +
-                        "</table>\n" +
-                        "<h2>Empfehlung für die Zugabe</h2>\n" +
-                        "\n" +
-                        "<table style=\"width:25%\">\n" +
-                        "  <tr>\n" +
-                        "    <th>Dünger</th>\n" +
-                        "    <th>Zugabemenge in ml pro Tag</th>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Eisen Power</td>\n" +
-                        "    <td>" + feMl + "</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>NPK Power</td>\n" +
-                        "    <td>" + npkMl + "</td>\n" +
-                        "  </tr>\n" +
-                        "</table>\n" +
-                        "\n" +
-                        "</body>\n" +
-                        "</html>";
-
-        return html;
+        StringBuilder json = new StringBuilder();
+        json.append("{");
+        json.append("\"nitrat\":" + consumptionArray[0]);
+        json.append(",");
+        json.append("\"phosphat\":" + consumptionArray[1]);
+        json.append(",");
+        json.append("\"kalium\":" + consumptionArray[2]);
+        json.append(",");
+        json.append("\"eisen\":" + consumptionArray[3]);
+        json.append(",");
+        json.append("\"npkMenge\":" + consumptionArray[4]);
+        json.append(",");
+        json.append("\"eisenMenge\":" + consumptionArray[5]);
+        json.append("}");
+        return json.toString();
     };
+
+    public void initialize(){
+        npk_power = new Fertilizer("NPK Power",0.62, 0.035, 0.309, 0, 0.028);
+        eisen_power = new Fertilizer("Eisen Power",0, 0, 0.309, 0.038, 0.149);
+    };
+
+
 }
