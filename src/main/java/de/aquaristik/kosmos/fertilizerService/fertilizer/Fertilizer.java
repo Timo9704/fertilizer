@@ -14,6 +14,8 @@ public class Fertilizer {
 
     private double magnesium;
 
+    private double dosage = 0.1;
+
     public String getName() {
         return name;
     }
@@ -54,12 +56,18 @@ public class Fertilizer {
         this.kalium = kalium;
     }
 
-    public void setEisen(double eisen) {
-        this.eisen = eisen;
-    }
+    public void setEisen(double eisen) { this.eisen = eisen; }
 
     public void setMagnesium(double magnesium) {
         this.magnesium = magnesium;
+    }
+
+    public double getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(double dosage) {
+        this.dosage = dosage;
     }
 
     public Fertilizer(String name, double nitrat, double phosphat, double kalium, double eisen, double magnesium) {
@@ -71,4 +79,10 @@ public class Fertilizer {
         this.magnesium = magnesium;
     }
 
+    public void calculateForAquarium(int liter) {
+        nitrat = Math.round(((nitrat * 100) / liter) * 100.0) / 100.0;
+        phosphat = Math.round(((phosphat * 100) / liter) * 100.0) / 100.0;
+        kalium = Math.round(((kalium * 100) / liter) * 100.0) / 100.0;
+        eisen = Math.round(((eisen * 100) / liter) * 100.0) / 100.0;
+    }
 }

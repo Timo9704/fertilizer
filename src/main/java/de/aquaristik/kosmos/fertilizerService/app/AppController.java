@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import de.aquaristik.kosmos.fertilizerService.aquarium.Aquarium;
 import de.aquaristik.kosmos.fertilizerService.aquarium.AquariumController;
 import de.aquaristik.kosmos.fertilizerService.fertilizer.Fertilizer;
-import de.aquaristik.kosmos.fertilizerService.fertilizer.FertilizerController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,61 +13,76 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AppController {
 
-    Fertilizer npk_power;
+    @PostMapping(value = "/convert")
+    public ResponseEntity convert(@RequestBody String jsonString) throws InterruptedException{
+        Gson gson = new Gson();
+        Aquarium aquarium = gson.fromJson(jsonString, Aquarium.class);
 
-    Fertilizer eisen_power;
+        Fertilizer[] fertilizers = initialize(aquarium.getFertilizerInUse());
+        Gson fertilizerGson = new Gson();
+        StringBuilder jsonResponse = new StringBuilder();
+        jsonResponse.append("{");
+        for (int i = 0; i < fertilizers.length; i++) {
+            fertilizers[i].calculateForAquarium(aquarium.getLiter());
+            fertilizers[i].setDosage(1);
+            jsonResponse.append(fertilizerGson.toJsonTree(fertilizers[i]));
+        }
+        jsonResponse.append("}");
 
+        return ResponseEntity.ok(jsonResponse);
+    }
 
     @PostMapping(value = "/consumption")
-    public ResponseEntity consumption(@RequestBody String jsonString) {
-        initialize();
+    public ResponseEntity consumption(@RequestBody String jsonString) throws InterruptedException {
         Gson gson = new Gson();
         Aquarium aquarium = gson.fromJson(jsonString, Aquarium.class);
         AquariumController aquariumController = new AquariumController(aquarium);
 
         double[] consumptionArray = aquariumController.consumption();
 
-        FertilizerController npk_power_controller = new FertilizerController(npk_power);
-        FertilizerController eisen_power_controller = new FertilizerController(eisen_power);
+        StringBuilder consumptionJson = new StringBuilder();
+        consumptionJson.append("{");
+        consumptionJson.append("\"nitrat\":" + consumptionArray[0]);
+        consumptionJson.append(",");
+        consumptionJson.append("\"phosphat\":" + consumptionArray[1]);
+        consumptionJson.append(",");
+        consumptionJson.append("\"kalium\":" + consumptionArray[2]);
+        consumptionJson.append(",");
+        consumptionJson.append("\"eisen\":" + consumptionArray[3]);
+        consumptionJson.append("}");
 
-        npk_power_controller.calculateForAquarium(aquarium.getLiter());
-        eisen_power_controller.calculateForAquarium(aquarium.getLiter());
-
-        double[] array = new double[6];
-
-        array[0] = consumptionArray[0];
-        array[1] = consumptionArray[1];
-        array[2] = consumptionArray[2];
-        array[3] = consumptionArray[3];
-        array[4] = npk_power_controller.calculateNpkDose(consumptionArray);
-        array[5] = eisen_power_controller.calculateFeDose(consumptionArray);
-
-        return ResponseEntity.ok(sendResponse(array));
+        return ResponseEntity.ok(consumptionJson);
     }
 
-    public String sendResponse(double[] consumptionArray){
+    public Fertilizer[] initialize(int[] fertilierInUse) {
+        Fertilizer[] fertilizers = new Fertilizer[fertilierInUse.length];
 
-        StringBuilder json = new StringBuilder();
-        json.append("{");
-        json.append("\"nitrat\":" + consumptionArray[0]);
-        json.append(",");
-        json.append("\"phosphat\":" + consumptionArray[1]);
-        json.append(",");
-        json.append("\"kalium\":" + consumptionArray[2]);
-        json.append(",");
-        json.append("\"eisen\":" + consumptionArray[3]);
-        json.append(",");
-        json.append("\"npkMenge\":" + consumptionArray[4]);
-        json.append(",");
-        json.append("\"eisenMenge\":" + consumptionArray[5]);
-        json.append("}");
-        return json.toString();
-    };
+        for (int i = 0; i < fertilierInUse.length; i++) {
 
-    public void initialize(){
-        npk_power = new Fertilizer("NPK Power",0.62, 0.035, 0.309, 0, 0.028);
-        eisen_power = new Fertilizer("Eisen Power",0, 0, 0.309, 0.038, 0.149);
-    };
+            switch (fertilierInUse[i]) {
+                case 0:
+                    fertilizers[i] = new Fertilizer("NPK Power", 0.62, 0.035, 0.309, 0, 0.028);
+                    break;
+                case 1:
+                    fertilizers[i] = new Fertilizer("Eisen Power", 0, 0, 0.309, 0.038, 0.149);
+                    break;
+                case 2:
+                    fertilizers[i] = new Fertilizer("N Power", 1.06, 0, 0.44, 0, 0);
+                    break;
+                case 3:
+                    fertilizers[i] = new Fertilizer("P Power", 0, 0.07, 0.083, 0, 0);
+                    break;
+                case 4:
+                    fertilizers[i] = new Fertilizer("K Power", 0, 0, 0.29, 0, 0);
+                    break;
+                default:
+                    System.out.println("i liegt nicht zwischen null und drei");
+                    break;
+            }
+        }
 
+        return fertilizers;
+    }
 
+    ;
 }
