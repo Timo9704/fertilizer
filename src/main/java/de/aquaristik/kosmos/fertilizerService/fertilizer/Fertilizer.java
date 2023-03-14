@@ -4,13 +4,13 @@ public class Fertilizer {
 
     private String name;
 
-    private double nitrat;
+    private double nitrate;
 
-    private double phosphat;
+    private double phosphate;
 
-    private double kalium;
+    private double potassium;
 
-    private double eisen;
+    private double iron;
 
     private double magnesium;
 
@@ -20,20 +20,20 @@ public class Fertilizer {
         return name;
     }
 
-    public double getNitrat() {
-        return nitrat;
+    public double getNitrate() {
+        return nitrate;
     }
 
-    public double getPhosphat() {
-        return phosphat;
+    public double getPhosphate() {
+        return phosphate;
     }
 
-    public double getKalium() {
-        return kalium;
+    public double getPotassium() {
+        return potassium;
     }
 
-    public double getEisen() {
-        return eisen;
+    public double getIron() {
+        return iron;
     }
 
     public double getMagnesium() {
@@ -44,19 +44,19 @@ public class Fertilizer {
         this.name = name;
     }
 
-    public void setNitrat(double nitrat) {
-        this.nitrat = nitrat;
+    public void setNitrate(double nitrate) {
+        this.nitrate = nitrate;
     }
 
-    public void setPhosphat(double phosphat) {
-        this.phosphat = phosphat;
+    public void setPhosphate(double phosphate) {
+        this.phosphate = phosphate;
     }
 
-    public void setKalium(double kalium) {
-        this.kalium = kalium;
+    public void setPotassium(double potassium) {
+        this.potassium = potassium;
     }
 
-    public void setEisen(double eisen) { this.eisen = eisen; }
+    public void setIron(double iron) { this.iron = iron; }
 
     public void setMagnesium(double magnesium) {
         this.magnesium = magnesium;
@@ -72,17 +72,18 @@ public class Fertilizer {
 
     public Fertilizer(String name, double nitrat, double phosphat, double kalium, double eisen, double magnesium) {
         this.name = name;
-        this.nitrat = nitrat;
-        this.phosphat = phosphat;
-        this.kalium = kalium;
-        this.eisen = eisen;
+        this.nitrate = nitrat;
+        this.phosphate = phosphat;
+        this.potassium = kalium;
+        this.iron = eisen;
         this.magnesium = magnesium;
     }
 
     public void calculateForAquarium(int liter) {
-        nitrat = Math.round(((nitrat * 100) / liter) * 100.0) / 100.0;
-        phosphat = Math.round(((phosphat * 100) / liter) * 100.0) / 100.0;
-        kalium = Math.round(((kalium * 100) / liter) * 100.0) / 100.0;
-        eisen = Math.round(((eisen * 100) / liter) * 100.0) / 100.0;
+        nitrate = Math.round(((nitrate * 100) / liter) * 100.0) / 100.0;
+        phosphate = Math.round(((phosphate * 100) / liter) * 100.0) / 100.0;
+        potassium = Math.round(((potassium * 100) / liter) * 100.0) / 100.0;
+        iron = Math.round(((iron * 100) / liter) * 100.0) / 100.0;
     }
+
 }

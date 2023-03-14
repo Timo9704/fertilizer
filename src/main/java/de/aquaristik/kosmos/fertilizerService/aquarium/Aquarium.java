@@ -3,17 +3,17 @@ package de.aquaristik.kosmos.fertilizerService.aquarium;
 public class Aquarium {
     private int liter = 0;
 
-    private double nitratIs1 = 0;
-    private double nitratIs2 = 0;
+    private double nitrateIs1 = 0;
+    private double nitrateIs2 = 0;
 
-    private double phosphatIs1 = 0;
-    private double phosphatIs2 = 0;
+    private double phosphateIs1 = 0;
+    private double phosphateIs2 = 0;
 
-    private double kaliumIs1 = 0;
-    private double kaliumIs2 = 0;
+    private double potassiumIs1 = 0;
+    private double potassiumIs2 = 0;
 
-    private double eisenIs1 = 0;
-    private double eisenIs2 = 0;
+    private double ironIs1 = 0;
+    private double ironIs2 = 0;
 
     int[] fertilizerInUse = null;
 
@@ -21,36 +21,36 @@ public class Aquarium {
         return liter;
     }
 
-    public double getNitratIs1() {
-        return nitratIs1;
+    public double getNitrateIs1() {
+        return nitrateIs1;
     }
 
-    public double getNitratIs2() {
-        return nitratIs2;
+    public double getNitrateIs2() {
+        return nitrateIs2;
     }
 
-    public double getPhosphatIs1() {
-        return phosphatIs1;
+    public double getPhosphateIs1() {
+        return phosphateIs1;
     }
 
-    public double getPhosphatIs2() {
-        return phosphatIs2;
+    public double getPhosphateIs2() {
+        return phosphateIs2;
     }
 
-    public double getKaliumIs1() {
-        return kaliumIs1;
+    public double getPotassiumIs1() {
+        return potassiumIs1;
     }
 
-    public double getKaliumIs2() {
-        return kaliumIs2;
+    public double getPotassiumIs2() {
+        return potassiumIs2;
     }
 
-    public double getEisenIs1() {
-        return eisenIs1;
+    public double getIronIs1() {
+        return ironIs1;
     }
 
-    public double getEisenIs2() {
-        return eisenIs2;
+    public double getIronIs2() {
+        return ironIs2;
     }
 
     public int[] getFertilizerInUse() {

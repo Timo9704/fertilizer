@@ -11,10 +11,10 @@ public class AquariumController {
 
         double[] consumption = new double[4];
 
-        consumption[0] = Math.round(((aquarium.getNitratIs1() - aquarium.getNitratIs2())/7) * 100.0) / 100.0;
-        consumption[1] = Math.round(((aquarium.getPhosphatIs1() - aquarium.getPhosphatIs2())/7) * 100.0) / 100.0;
-        consumption[2] = Math.round(((aquarium.getKaliumIs1() - aquarium.getKaliumIs2())/7) * 100.0) / 100.0;
-        consumption[3] = Math.round(((aquarium.getEisenIs1() - aquarium.getEisenIs2())/7) * 100.0) / 100.0;
+        consumption[0] = Math.round(((aquarium.getNitrateIs1() - aquarium.getNitrateIs2())/7) * 100.0) / 100.0;
+        consumption[1] = Math.round(((aquarium.getPhosphateIs1() - aquarium.getPhosphateIs2())/7) * 100.0) / 100.0;
+        consumption[2] = Math.round(((aquarium.getPotassiumIs1() - aquarium.getPotassiumIs2())/7) * 100.0) / 100.0;
+        consumption[3] = Math.round(((aquarium.getIronIs1() - aquarium.getIronIs2())/7) * 100.0) / 100.0;
 
         return consumption;
     }
