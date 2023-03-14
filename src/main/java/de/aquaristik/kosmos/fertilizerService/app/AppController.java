@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 @RestController
 public class AppController {
@@ -19,17 +24,14 @@ public class AppController {
         Aquarium aquarium = gson.fromJson(jsonString, Aquarium.class);
 
         Fertilizer[] fertilizers = initialize(aquarium.getFertilizerInUse());
-        Gson fertilizerGson = new Gson();
-        StringBuilder jsonResponse = new StringBuilder();
-        jsonResponse.append("{");
+        List<Fertilizer> resp = new ArrayList<>();
         for (int i = 0; i < fertilizers.length; i++) {
             fertilizers[i].calculateForAquarium(aquarium.getLiter());
             fertilizers[i].setDosage(1);
-            jsonResponse.append(fertilizerGson.toJsonTree(fertilizers[i]));
+            resp.add(fertilizers[i]);
         }
-        jsonResponse.append("}");
 
-        return ResponseEntity.ok(jsonResponse);
+        return ResponseEntity.ok(resp);
     }
 
     @PostMapping(value = "/consumption")
@@ -40,20 +42,16 @@ public class AppController {
 
         double[] consumptionArray = aquariumController.consumption();
 
-        StringBuilder consumptionJson = new StringBuilder();
-        consumptionJson.append("{");
-        consumptionJson.append("\"nitrat\":" + consumptionArray[0]);
-        consumptionJson.append(",");
-        consumptionJson.append("\"phosphat\":" + consumptionArray[1]);
-        consumptionJson.append(",");
-        consumptionJson.append("\"kalium\":" + consumptionArray[2]);
-        consumptionJson.append(",");
-        consumptionJson.append("\"eisen\":" + consumptionArray[3]);
-        consumptionJson.append("}");
+        Map<String,Double> resp = new HashMap<>();
 
-        return ResponseEntity.ok(consumptionJson);
+        resp.put("nitrate", consumptionArray[0]);
+        resp.put("phosphate", consumptionArray[1]);
+        resp.put("potassium", consumptionArray[2]);
+        resp.put("iron", consumptionArray[3]);
+
+        return ResponseEntity.ok(resp);
     }
-
+    
     public Fertilizer[] initialize(int[] fertilierInUse) {
         Fertilizer[] fertilizers = new Fertilizer[fertilierInUse.length];
 
