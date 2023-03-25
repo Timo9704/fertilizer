@@ -1,10 +1,12 @@
 package de.aquaristik.kosmos.fertilizerService.service;
 
 import de.aquaristik.kosmos.fertilizerService.model.Fertilizer;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Component("fertilizerService")
 public class FertilizerService {
 
     private List<Fertilizer> fertilizers = Arrays.asList(
@@ -21,13 +23,5 @@ public class FertilizerService {
 
     public Fertilizer getFertilizer(int id){
         return fertilizers.stream().filter(f -> f.getId() == id).findFirst().get();
-    }
-
-    public Fertilizer[] getFertilizerArray(int[] ids){
-        Fertilizer[] fertilizerArray;
-        for (int i = 0; i < ids.length; i++) {
-            fertilizers.stream().filter(f -> f.getId() == ids[i]).findFirst().get();
-        }
-        return fertilizerArray;
     }
 }

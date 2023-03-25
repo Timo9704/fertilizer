@@ -25,15 +25,16 @@ public class AppController {
         Gson gson = new Gson();
         Aquarium aquarium = gson.fromJson(jsonString, Aquarium.class);
 
-        List<Fertilizer> =
-        List<Fertilizer> resp = new ArrayList<>();
-        for (int i = 0; i < fertilizers.length; i++) {
-            fertilizers[i].calculateForAquarium(aquarium.getLiter());
-            fertilizers[i].setDosage(1);
-            resp.add(fertilizers[i]);
-        }
+        int[] fertilizerInUse = aquarium.getFertilizerInUse();
 
-        return ResponseEntity.ok(resp);
+        List<Fertilizer> respList = new ArrayList<>();
+        for (int i = 0; i < fertilizerInUse.length; i++) {
+            Fertilizer fertilizer = fertilizerService.getFertilizer(fertilizerInUse[i]);
+            fertilizer.calculateForAquarium(aquarium.getLiter());
+            fertilizer.setDosage(1);
+            respList.add(fertilizer);
+        }
+        return ResponseEntity.ok(respList);
     }
 
     @PostMapping(value = "/consumption")
