@@ -1,4 +1,4 @@
-package de.aquaristik.kosmos.fertilizerService.aquarium;
+package de.aquaristik.kosmos.fertilizerService.model;
 
 public class Aquarium {
     private int liter = 0;

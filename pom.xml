@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<start-class>de.aquaristik.kosmos.fertilizerService.app.AppController</start-class>
+		<start-class>de.aquaristik.kosmos.fertilizerService.controller.AppController</start-class>
 	</properties>
 	<dependencies>
 		<dependency>

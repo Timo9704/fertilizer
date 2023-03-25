@@ -1,6 +1,8 @@
-package de.aquaristik.kosmos.fertilizerService.fertilizer;
+package de.aquaristik.kosmos.fertilizerService.model;
 
 public class Fertilizer {
+
+    private int id;
 
     private String name;
 
@@ -15,6 +17,11 @@ public class Fertilizer {
     private double magnesium;
 
     private double dosage = 0.1;
+
+
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -38,6 +45,10 @@ public class Fertilizer {
 
     public double getMagnesium() {
         return magnesium;
+    }
+
+    public void setId() {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -70,7 +81,8 @@ public class Fertilizer {
         this.dosage = dosage;
     }
 
-    public Fertilizer(String name, double nitrat, double phosphat, double kalium, double eisen, double magnesium) {
+    public Fertilizer(int id, String name, double nitrat, double phosphat, double kalium, double eisen, double magnesium) {
+        this.id = id;
         this.name = name;
         this.nitrate = nitrat;
         this.phosphate = phosphat;

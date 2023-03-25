@@ -1,9 +1,11 @@
-package de.aquaristik.kosmos.fertilizerService.aquarium;
+package de.aquaristik.kosmos.fertilizerService.service;
 
-public class AquariumController {
+import de.aquaristik.kosmos.fertilizerService.model.Aquarium;
+
+public class AquariumService {
     private Aquarium aquarium;
 
-    public AquariumController(Aquarium aquarium){
+    public AquariumService(Aquarium aquarium){
         this.aquarium = aquarium;
     }
 
