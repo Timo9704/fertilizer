@@ -54,4 +54,17 @@ public class AppController {
 
         return ResponseEntity.ok(resp);
     }
+
+    @PostMapping(value = "/calculation")
+    public ResponseEntity calculation(@RequestBody String jsonString) throws InterruptedException {
+        Gson gson = new Gson();
+        Aquarium aquarium = gson.fromJson(jsonString, Aquarium.class);
+        AquariumService aquariumService = new AquariumService(aquarium);
+
+        double[] consumptionArray = aquariumService.consumption();
+
+
+
+        return ResponseEntity.ok("Ok");
+    }
 }
