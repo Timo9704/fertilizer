@@ -24,4 +24,14 @@ public class FertilizerService {
     public Fertilizer getFertilizer(int id){
         return fertilizers.stream().filter(f -> f.getId() == id).findFirst().get();
     }
+    
+    public double[] nutrientsPerMl(Fertilizer fertilizer, double ml){
+        double[] nutrientArray = new double[4];
+        nutrientArray[0] = fertilizer.getNitrate() * ml;
+        nutrientArray[1] = fertilizer.getPhosphate() * ml;
+        nutrientArray[2] = fertilizer.getPotassium() * ml;
+        nutrientArray[3] = fertilizer.getIron() * ml;
+
+        return nutrientArray;
+    }
 }
