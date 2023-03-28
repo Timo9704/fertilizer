@@ -21,7 +21,7 @@ public class AppController {
     FertilizerService fertilizerService;
 
     @PostMapping(value = "/convert")
-    public ResponseEntity convert(@RequestBody String jsonString) throws InterruptedException{
+    public ResponseEntity convert(@RequestBody String jsonString){
         Gson gson = new Gson();
         Aquarium aquarium = gson.fromJson(jsonString, Aquarium.class);
 
@@ -38,7 +38,7 @@ public class AppController {
     }
 
     @PostMapping(value = "/consumption")
-    public ResponseEntity consumption(@RequestBody String jsonString) throws InterruptedException {
+    public ResponseEntity consumption(@RequestBody String jsonString){
         Gson gson = new Gson();
         Aquarium aquarium = gson.fromJson(jsonString, Aquarium.class);
         AquariumService aquariumService = new AquariumService(aquarium);
