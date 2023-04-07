@@ -1,5 +1,6 @@
 package de.aquaristik.kosmos.fertilizerService.model;
 
+import java.util.List;
 public class DoseMixer {
 
     private double nitrateConsumption;
@@ -26,16 +27,19 @@ public class DoseMixer {
 
     private double ironMax;
 
-    public DoseMixer(double nitrateConsumption, double phosphateConsumption, double potassiumConsumption, double ironConsumption){
+    private List<Fertilizer> fertilizerList;
+
+    public DoseMixer(double nitrateConsumption, double phosphateConsumption, double potassiumConsumption, double ironConsumption, List<Fertilizer> fertilizerList){
         this.nitrateConsumption = nitrateConsumption;
         this.phosphateConsumption = phosphateConsumption;
         this.potassiumConsumption = potassiumConsumption;
         this.ironConsumption = ironConsumption;
+        this.fertilizerList = fertilizerList;
         calculateMinMax();
     }
 
     private void calculateMinMax(){
-        double buffer = 0.025;
+        double buffer = 0.1;
         nitrateMin = nitrateConsumption - (nitrateConsumption * buffer);
         nitrateMax = nitrateConsumption + (nitrateConsumption * buffer);
 
@@ -47,5 +51,37 @@ public class DoseMixer {
 
         ironMin = ironConsumption - (ironConsumption * buffer);
         ironMax = ironConsumption + (ironConsumption * buffer);
+    }
+
+    public double getNitrateMin() {
+        return nitrateMin;
+    }
+
+    public double getNitrateMax() {
+        return nitrateMax;
+    }
+
+    public double getPhosphateMin() {
+        return phosphateMin;
+    }
+
+    public double getPhosphateMax() {
+        return phosphateMax;
+    }
+
+    public double getPotassiumMin() {
+        return potassiumMin;
+    }
+
+    public double getPotassiumMax() {
+        return potassiumMax;
+    }
+
+    public double getIronMin() {
+        return ironMin;
+    }
+
+    public double getIronMax() {
+        return ironMax;
     }
 }
