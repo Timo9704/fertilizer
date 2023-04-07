@@ -43,11 +43,18 @@ public class FertilizerService {
     }
     
     public double[] nutrientsPerMl(Fertilizer fertilizer, double ml){
+
+
+    public double[] nutrientsPerMl(Fertilizer fertilizer){
         double[] nutrientArray = new double[4];
         nutrientArray[0] = fertilizer.getNitrate() * ml;
         nutrientArray[1] = fertilizer.getPhosphate() * ml;
         nutrientArray[2] = fertilizer.getPotassium() * ml;
         nutrientArray[3] = fertilizer.getIron() * ml;
+        nutrientArray[0] = fertilizer.getNitrate() * fertilizer.getDosage();
+        nutrientArray[1] = fertilizer.getPhosphate() * fertilizer.getDosage();
+        nutrientArray[2] = fertilizer.getPotassium() * fertilizer.getDosage();
+        nutrientArray[3] = fertilizer.getIron() * fertilizer.getDosage();
 
         return nutrientArray;
     }
