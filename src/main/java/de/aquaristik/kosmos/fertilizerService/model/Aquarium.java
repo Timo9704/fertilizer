@@ -15,6 +15,10 @@ public class Aquarium {
     private double ironIs1 = 0;
     private double ironIs2 = 0;
 
+    private double dosage = 1;
+
+    private int days = 7;
+
     int[] fertilizerInUse = null;
 
     public int getLiter() {
@@ -57,4 +61,11 @@ public class Aquarium {
         return fertilizerInUse;
     }
 
+    public double getDosage() {
+        return dosage;
+    }
+
+    public int getDays() {
+        return days;
+    }
 }
