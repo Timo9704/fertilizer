@@ -47,37 +47,20 @@ public class Fertilizer {
         return magnesium;
     }
 
-    public void setId() {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setNitrate(double nitrate) {
-        this.nitrate = nitrate;
-    }
-
-    public void setPhosphate(double phosphate) {
-        this.phosphate = phosphate;
-    }
-
-    public void setPotassium(double potassium) {
-        this.potassium = potassium;
-    }
-
-    public void setIron(double iron) { this.iron = iron; }
-
-    public void setMagnesium(double magnesium) {
-        this.magnesium = magnesium;
-    }
-
     public double getDosage() {
         return dosage;
     }
 
     public void setDosage(double dosage) {
+        this.dosage = dosage;
+    }
+
+    public void setDosageModfiy(double dosage) {
+        this.nitrate = nitrate * dosage;
+        this.phosphate = phosphate * dosage;
+        this.potassium = potassium * dosage;
+        this.iron = iron * dosage;
+        this.magnesium = magnesium * dosage;
         this.dosage = dosage;
     }
 
@@ -96,6 +79,13 @@ public class Fertilizer {
         phosphate = Math.round(((phosphate * 100) / liter) * 100.0) / 100.0;
         potassium = Math.round(((potassium * 100) / liter) * 100.0) / 100.0;
         iron = Math.round(((iron * 100) / liter) * 100.0) / 100.0;
+    }
+
+    public void calculateForAquariumPrecise(int liter) {
+        nitrate = (nitrate * 100) / liter;
+        phosphate = (phosphate * 100) / liter;
+        potassium = (potassium * 100) / liter;
+        iron = (iron * 100) / liter;
     }
 
 }
