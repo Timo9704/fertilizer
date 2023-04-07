@@ -9,13 +9,6 @@ import java.util.List;
 @Component("fertilizerService")
 public class FertilizerService {
 
-    private List<Fertilizer> fertilizers = Arrays.asList(
-            new Fertilizer(0,"NPK Power", 0.62, 0.035, 0.309, 0, 0.028),
-            new Fertilizer(1,"Eisen Power", 0, 0, 0.309, 0.038, 0.149),
-            new Fertilizer(2,"N Power", 1.06, 0, 0.44, 0, 0),
-            new Fertilizer(3,"P Power", 0, 0.07, 0.083, 0, 0),
-            new Fertilizer(4,"K Power", 0, 0, 0.29, 0, 0)
-    );
     private List<Fertilizer> fertilizers;
 
     public void init(){
@@ -41,16 +34,10 @@ public class FertilizerService {
     public Fertilizer getFertilizer(int id){
         return fertilizers.stream().filter(f -> f.getId() == id).findFirst().get();
     }
-    
-    public double[] nutrientsPerMl(Fertilizer fertilizer, double ml){
 
 
     public double[] nutrientsPerMl(Fertilizer fertilizer){
         double[] nutrientArray = new double[4];
-        nutrientArray[0] = fertilizer.getNitrate() * ml;
-        nutrientArray[1] = fertilizer.getPhosphate() * ml;
-        nutrientArray[2] = fertilizer.getPotassium() * ml;
-        nutrientArray[3] = fertilizer.getIron() * ml;
         nutrientArray[0] = fertilizer.getNitrate() * fertilizer.getDosage();
         nutrientArray[1] = fertilizer.getPhosphate() * fertilizer.getDosage();
         nutrientArray[2] = fertilizer.getPotassium() * fertilizer.getDosage();
