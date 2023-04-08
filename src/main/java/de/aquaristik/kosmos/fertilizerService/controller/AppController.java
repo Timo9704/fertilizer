@@ -9,6 +9,7 @@ import de.aquaristik.kosmos.fertilizerService.service.DoseMixerService;
 import de.aquaristik.kosmos.fertilizerService.service.FertilizerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,12 @@ public class AppController {
     @Autowired
     DoseMixerService doseMixerService;
 
+
+    @GetMapping(value = "/getAllFertilizer")
+    public ResponseEntity getAllFertilizer(){
+        fertilizerService.init();
+        return ResponseEntity.ok(fertilizerService.getAllFertilizers());
+    }
 
     @PostMapping(value = "/convert")
     public ResponseEntity convert(@RequestBody String jsonString){
