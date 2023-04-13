@@ -1,6 +1,6 @@
-FROM tomcat:9.0.73-jdk11-corretto
+FROM tomcat:11.0
 
-COPY target/fertilizer.war /usr/local/tomcat/webapps/
+ADD target/fertilizer.war /usr/local/tomcat/webapps-javaee/
 
 CMD chmod +x /usr/local/tomcat/bin/catalina.sh
 
