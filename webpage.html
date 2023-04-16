@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8" />
+    <title>Meine Seite mit Spalten-Layout</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f4f4f4;
+      }
+
+      .spalte {
+        display: inline-block;
+        margin: 1%;
+        width: 30%;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .sendButton {
+        background-color: #4caf50;
+        font-size: 15px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: white;
+        padding: 10px;
+        margin-top: 20px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+      }
+
+      .addButton {
+        background-color: #d8d6d6;
+        font-size: 12px;
+        margin-bottom: 20px;
+        padding: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+      }
+
+      .center {
+        margin: auto;
+        width: 40%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .center label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .center input[type="number"],
+      .center select {
+        width: 100%;
+        padding: 10;
+        border-radius: 5px;
+        border: none;
+        background-color: #f4f4f4;
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+
+      .center select {
+        appearance: none;
+        -webkit-appearance: none;
+        background: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-512.png")
+          no-repeat;
+        background-position: 95% center;
+        background-size: 18px;
+        cursor: pointer;
+      }
+
+      .center select:focus {
+        outline: none;
+      }
+
+      .center input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .center input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #f4f4f4;
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+
+      input[type="number"]:focus {
+        outline: none;
+      }
+
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      .headline {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bold;
+        color: #4caf50;
+      }
+
+      .fertilizerDropdowns {
+        margin-bottom: 20px;
+      }
+
+      .dropdownGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    </style>
+  </head>
+
+  <body onload="getFertilizer()">
+    <div class="spalte">
+      <p class="headline">1. Messung</p>
+      <label for="nitrateIs1">Nitrat</label>
+      <input
+        type="number"
+        step="0.1"
+        id="nitrateIs1"
+        placeholder="Wert in mg/L"
+      /><br />
+      <label for="phosphateIs1">Phosphat</label>
+      <input type="number" id="phosphateIs1" placeholder="Wert in mg/L" /><br />
+      <label for="potassiumIs1">Kalium</label>
+      <input type="number" id="potassiumIs1" placeholder="Wert in mg/L" /><br />
+      <label for="ironIs1">Eisen</label>
+      <input type="number" id="ironIs1" placeholder="Wert in mg/L" />
+    </div>
+    <div class="spalte">
+      <p class="headline">2. Messung</p>
+      <label for="nitrateIs2">Nitrat</label>
+      <input type="number" id="nitrateIs2" placeholder="Wert in mg/L" /><br />
+      <label for="phosphateIs2">Phosphat</label>
+      <input type="number" id="phosphateIs2" placeholder="Wert in mg/L" /><br />
+      <label for="potassiumIs2">Kalium</label>
+      <input type="number" id="potassiumIs2" placeholder="Wert in mg/L" /><br />
+      <label for="ironIs2">Eisen</label>
+      <input type="number" id="ironIs2" placeholder="Wert in mg/L" />
+    </div>
+    <div class="spalte">
+      <label for="liter">Liter des Aquariums (netto):</label>
+      <input type="number" id="liter" placeholder="Wert in Liter" />
+      <div id="dropdowns">
+        <div>
+          <label for="fertilizer1">Dünger:</label>
+          <div class="dropdownGrid" id="dropdown-container">
+            <select class="fertilizerDropdowns" id="fertilizer1"></select>
+          </div>
+          <button type="button" class="addButton" onclick="addDropdown()">
+            Dünger hinzufügen
+          </button>
+        </div>
+        <button
+          type="button"
+          class="sendButton"
+          id="sendRequest"
+          onclick="sendRequest()"
+        >
+          Berechnen
+        </button>
+      </div>
+    </div>
+    <div>
+      <canvas id="dunger-chart"></canvas>
+    </div>
+
+    <script>
+      function sendRequest() {
+        var fertilizerInUse = [];
+
+        var dropdownDiv = document.getElementById("dropdown-container");
+        var dropdowns = dropdownDiv.querySelectorAll("select");
+
+        dropdowns.forEach((dropdown) => {
+          fertilizerInUse.push(parseInt(dropdown.value));
+        });
+
+        fetch(
+          "https://q6h486sln5.execute-api.eu-west-2.amazonaws.com/v2/calculation",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              liter: document.getElementById("liter").value || 0,
+              nitrateIs1: document.getElementById("nitrateIs1").value || 0,
+              phosphateIs1: document.getElementById("phosphateIs1").value || 0,
+              potassiumIs1: document.getElementById("potassiumIs1").value || 0,
+              ironIs1: document.getElementById("ironIs1").value || 0,
+              nitrateIs2: document.getElementById("nitrateIs2").value || 0,
+              phosphateIs2: document.getElementById("phosphateIs2").value || 0,
+              potassiumIs2: document.getElementById("potassiumIs2").value || 0,
+              ironIs2: document.getElementById("ironIs2").value || 0,
+              fertilizerInUse: fertilizerInUse,
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          }
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            createChart(data);
+          });
+      }
+
+      function addDropdown() {
+        var dropdownContainer = document.getElementById("dropdown-container");
+        if (dropdownContainer.children.length < 4) {
+          var newDropdown = document.createElement("select");
+          newDropdown.name =
+            "fertilizer" + (dropdownContainer.children.length + 1);
+          newDropdown.id =
+            "fertilizer" + (dropdownContainer.children.length + 1);
+          var options = document.getElementById("fertilizer1").innerHTML;
+          newDropdown.innerHTML = options;
+          newDropdown.classList.add("fertilizerDropdowns");
+          dropdownContainer.appendChild(newDropdown);
+        }
+      }
+
+      function getFertilizer() {
+        fetch(
+          "https://q6h486sln5.execute-api.eu-west-2.amazonaws.com/v2/getAllFertilizer"
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            data.forEach((eintrag) => {
+              const option = document.createElement("option");
+              option.value = eintrag.id;
+              option.textContent = eintrag.name;
+              fertilizer1.appendChild(option);
+            });
+          });
+      }
+
+      function createChart(data) {
+        const response = data;
+
+        if (document.getElementById("dunger-chart")) {
+          document.getElementById("dunger-chart").destroy;
+        }
+
+        const ctx = document.getElementById("dunger-chart").getContext("2d");
+        const chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: Object.keys(response),
+            datasets: [
+              {
+                label: "Menge in ml",
+                data: Object.values(response),
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
