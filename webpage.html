@@ -8,7 +8,7 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8" />
-    <title>Meine Seite mit Spalten-Layout</title>
+    <title>Fertilizer-Calculator</title>
     <style>
       * {
         box-sizing: border-box;
@@ -158,66 +158,130 @@
         display: grid;
         grid-template-columns: 1fr;
       }
+
+      .details {
+        font-size: 24px;
+        margin: 20px;
+        padding: 20px;
+        background-color: #3e8e41;
+        color: white;
+      }
+
+      .text{
+        margin-left: 50px;
+      }
     </style>
   </head>
 
   <body onload="getFertilizer()">
-    <div class="spalte">
-      <p class="headline">1. Messung</p>
-      <label for="nitrateIs1">Nitrat</label>
-      <input
-        type="number"
-        step="0.1"
-        id="nitrateIs1"
-        placeholder="Wert in mg/L"
-      /><br />
-      <label for="phosphateIs1">Phosphat</label>
-      <input type="number" id="phosphateIs1" placeholder="Wert in mg/L" /><br />
-      <label for="potassiumIs1">Kalium</label>
-      <input type="number" id="potassiumIs1" placeholder="Wert in mg/L" /><br />
-      <label for="ironIs1">Eisen</label>
-      <input type="number" id="ironIs1" placeholder="Wert in mg/L" />
-    </div>
-    <div class="spalte">
-      <p class="headline">2. Messung</p>
-      <label for="nitrateIs2">Nitrat</label>
-      <input type="number" id="nitrateIs2" placeholder="Wert in mg/L" /><br />
-      <label for="phosphateIs2">Phosphat</label>
-      <input type="number" id="phosphateIs2" placeholder="Wert in mg/L" /><br />
-      <label for="potassiumIs2">Kalium</label>
-      <input type="number" id="potassiumIs2" placeholder="Wert in mg/L" /><br />
-      <label for="ironIs2">Eisen</label>
-      <input type="number" id="ironIs2" placeholder="Wert in mg/L" />
-    </div>
-    <div class="spalte">
-      <label for="liter">Liter des Aquariums (netto):</label>
-      <input type="number" id="liter" placeholder="Wert in Liter" />
-      <div id="dropdowns">
-        <div>
-          <label for="fertilizer1">Dünger:</label>
-          <div class="dropdownGrid" id="dropdown-container">
-            <select class="fertilizerDropdowns" id="fertilizer1"></select>
-          </div>
-          <button type="button" class="addButton" onclick="addDropdown()">
-            Dünger hinzufügen
-          </button>
+    <details>
+      <summary class ="details">Dünger-Berechnung</summary>
+      <div class="text">
+      <p>Dieser Dünger- und Verbrauchsrechner soll jedem Aquarianer eine einfache Möglichkeit bieten den Tagesverbrauch seines Aquariums zu berechnen und darauf basierend eine Empfehlung für die tägliche Zugabemenge zu bekommen.
+        <br><br>
+        Diese Schritte sind für die Berechnung notwendig:
+        <br></p>
+        <ul>
+        <li>Bringe deine Nährstoffe (NO3, PO4, K, Fe) auf einen optimalen Bereich (siehe z.B. JBL)</li>
+        <li>Gebe entsprechend der Herstellerangabe des Düngers die Menge für 7 Tage hinzu!</li>
+        <li>Messe die Konzentration der Nährstoffe eine kurze Zeit nach der Zugabe und notiere dir diese Werte!</li>
+        <li>Messe erneut nach 7 Tagen die Konzentration der Nährstoffe und notiere dir ebenfalls diese Werte!</li>
+        <li>Gebe die Messwerte in den Feldern ein und erhalte den Tagesverbrauch deiner Pflanzen im Aquarium! </li>
+        <li>Hinweis: Solltest du einen Wasserwert nicht gemessen haben, dann trage dafür 0 in dem entsprechenden Feld ein.</li>
+        </ul>
+      </div>
+        <div class="spalte">
+          <p class="headline">1. Messung</p>
+          <label for="nitrateIs1">Nitrat</label>
+          <input
+            type="number"
+            step="0.1"
+            id="nitrateIs1"
+            placeholder="Wert in mg/L"
+          /><br />
+          <label for="phosphateIs1">Phosphat</label>
+          <input
+            type="number"
+            step="0.1"
+            id="phosphateIs1"
+            placeholder="Wert in mg/L"
+          /><br />
+          <label for="potassiumIs1">Kalium</label>
+          <input
+            type="number"
+            step="0.1"
+            id="potassiumIs1"
+            placeholder="Wert in mg/L"
+          /><br />
+          <label for="ironIs1">Eisen</label>
+          <input type="number" step="0.1" id="ironIs1" placeholder="Wert in mg/L" />
         </div>
-        <button
-          type="button"
-          class="sendButton"
-          id="sendRequest"
-          onclick="sendRequest()"
-        >
-          Berechnen
-        </button>
+        <div class="spalte">
+          <p class="headline">2. Messung</p>
+          <label for="nitrateIs2">Nitrat</label>
+          <input
+            type="number"
+            step="0.1"
+            id="nitrateIs2"
+            placeholder="Wert in mg/L"
+          /><br />
+          <label for="phosphateIs2">Phosphat</label>
+          <input
+            type="number"
+            step="0.1"
+            id="phosphateIs2"
+            placeholder="Wert in mg/L"
+          /><br />
+          <label for="potassiumIs2">Kalium</label>
+          <input
+            type="number"
+            step="0.1"
+            id="potassiumIs2"
+            placeholder="Wert in mg/L"
+          /><br />
+          <label for="ironIs2">Eisen</label>
+          <input type="number" step="0.1" id="ironIs2" placeholder="Wert in mg/L" />
+        </div>
+        <div class="spalte">
+          <label for="liter">Liter des Aquariums (netto):</label>
+          <input type="number" id="liter" placeholder="Wert in Liter" />
+          <div id="dropdowns">
+            <div>
+              <label for="fertilizer1">Dünger:</label>
+              <div class="dropdownGrid" id="dropdown-container">
+                <select class="fertilizerDropdowns" id="fertilizer1"></select>
+              </div>
+              <button type="button" class="addButton" onclick="addDropdown()">
+                Dünger hinzufügen
+              </button>
+            </div>
+            <button
+              type="button"
+              class="sendButton"
+              id="sendCalculationRequest"
+              onclick="sendCalculationRequest()">
+              Berechnen
+            </button>
+          </div>
+        </div>
+        <div id="chartDiv" style="display:none">
+          <canvas id="dunger-chart"></canvas>
+        </div>
+        <div id="errorDiv" style="display:none">
+        </div>
       </div>
     </div>
-    <div>
-      <canvas id="dunger-chart"></canvas>
-    </div>
-
+  </details>
+  <details>
+  <summary class ="details">Dünger-Konverter</summary>
+    <p>Hier wird künftig der Dünger-Konverter zur Verfügung stehen!</p>
+  </details>
+  <details>
+    <summary class ="details">Verbrauchsrechner</summary>
+      <p>Hier wird künftig der Verbrauchsrechner zur Verfügung stehen!</p>
+  </details>
     <script>
-      function sendRequest() {
+      function sendCalculationRequest() {
         var fertilizerInUse = [];
 
         var dropdownDiv = document.getElementById("dropdown-container");
@@ -232,15 +296,15 @@
           {
             method: "POST",
             body: JSON.stringify({
-              liter: document.getElementById("liter").value || 0,
-              nitrateIs1: document.getElementById("nitrateIs1").value || 0,
-              phosphateIs1: document.getElementById("phosphateIs1").value || 0,
-              potassiumIs1: document.getElementById("potassiumIs1").value || 0,
-              ironIs1: document.getElementById("ironIs1").value || 0,
-              nitrateIs2: document.getElementById("nitrateIs2").value || 0,
-              phosphateIs2: document.getElementById("phosphateIs2").value || 0,
-              potassiumIs2: document.getElementById("potassiumIs2").value || 0,
-              ironIs2: document.getElementById("ironIs2").value || 0,
+              liter: parseFloat(document.getElementById("liter").value) || 0,
+              nitrateIs1: parseFloat(document.getElementById("nitrateIs1").value) || 0,
+              phosphateIs1: parseFloat(document.getElementById("phosphateIs1").value) || 0,
+              potassiumIs1: parseFloat(document.getElementById("potassiumIs1").value) || 0,
+              ironIs1: parseFloat(document.getElementById("ironIs1").value) || 0,
+              nitrateIs2: parseFloat(document.getElementById("nitrateIs2").value) || 0,
+              phosphateIs2: parseFloat(document.getElementById("phosphateIs2").value) || 0,
+              potassiumIs2: parseFloat(document.getElementById("potassiumIs2").value) || 0,
+              ironIs2: parseFloat(document.getElementById("ironIs2").value) || 0,
               fertilizerInUse: fertilizerInUse,
             }),
             headers: {
@@ -289,47 +353,62 @@
       }
 
       function createChart(data) {
-        const response = data;
 
         if (document.getElementById("dunger-chart")) {
-          document.getElementById("dunger-chart").destroy;
-        }
+            document.getElementById("dunger-chart").destroy;
+          }
 
-        const ctx = document.getElementById("dunger-chart").getContext("2d");
-        const chart = new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: Object.keys(response),
-            datasets: [
-              {
-                label: "Menge in ml",
-                data: Object.values(response),
-                backgroundColor: [
-                  "rgba(255, 99, 132, 0.2)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(255, 206, 86, 0.2)",
-                ],
-                borderColor: [
-                  "rgba(255, 99, 132, 1)",
-                  "rgba(54, 162, 235, 1)",
-                  "rgba(255, 206, 86, 1)",
-                ],
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            scales: {
-              yAxes: [
+        const response = data;
+        if(!("Error" in data)){
+          document.getElementById("chartDiv").style.display = "block"
+        
+          const ctx = document.getElementById("dunger-chart").getContext("2d");
+          const chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: Object.keys(response),
+              datasets: [
                 {
-                  ticks: {
-                    beginAtZero: true,
-                  },
+                  label: "Menge in ml",
+                  data: Object.values(response),
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                  ],
+                  borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                  ],
+                  borderWidth: 1,
                 },
               ],
             },
-          },
-        });
+            options: {
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                    },
+                  },
+                ],
+              },
+            },
+          });
+        }else{
+          if(data.Error === 0){
+            document.getElementById("errorDiv").style.display = "block"
+            var errDiv = document.getElementById("errorDiv");
+            var content = document.createTextNode("");
+            errDiv.innerHTML = "<p class='text'>Es konnte keine Kombination errechnet werden! Versuch doch einfach eine andere Dünger-Kombination.</p>";
+          }else{
+            document.getElementById("errorDiv").style.display = "block"
+            var errDiv = document.getElementById("errorDiv");
+            errDiv.innerHTML = "<p class='text'>Es ist ein Fehler aufgetreten!</p>";
+          }
+      }
       }
     </script>
   </body>
