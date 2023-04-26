@@ -23,7 +23,13 @@ public class FertilizerService {
                 new Fertilizer(7,"AquaRebell Makro Spezial N", 0.5, 0, 0.1, 0, 0.035),
                 new Fertilizer(8,"AquaRebell Makro Basic Nitrat", 0.5, 0, 0.1, 0, 0),
                 new Fertilizer(8,"AquaRebell Makro Basic Phosphat", 0, 0.05, 0.02, 0, 0),
-                new Fertilizer(9,"AquaRebell Makro Basic Kalium", 0, 0, 0.025, 0, 0)
+                new Fertilizer(9,"AquaRebell Makro Basic Kalium", 0, 0, 0.025, 0, 0),
+                new Fertilizer(10,"Masterline 1", 0, 0, 0, 0.027, 0),
+                new Fertilizer(11,"Masterline 2", 0.36, 0.06, 0.036, 0, 0),
+                new Fertilizer(12,"Masterline Nitrate", 0.3, 0, 0.189, 0, 0),
+                new Fertilizer(13,"Masterline Phosphate", 0, 0.15, 0.06, 0, 0),
+                new Fertilizer(14,"Masterline Potassium", 0, 0, 0.3, 0, 0),
+                new Fertilizer(14,"Masterline Iron", 0, 0, 0, 0.03, 0)
         );
     }
 
