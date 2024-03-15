@@ -29,7 +29,15 @@ public class FertilizerService {
                 new Fertilizer(12,"Masterline Nitrate", 0.3, 0, 0.189, 0, 0),
                 new Fertilizer(13,"Masterline Phosphate", 0, 0.15, 0.06, 0, 0),
                 new Fertilizer(14,"Masterline Potassium", 0, 0, 0.3, 0, 0),
-                new Fertilizer(14,"Masterline Iron", 0, 0, 0, 0.03, 0)
+                new Fertilizer(14,"Masterline Iron", 0, 0, 0, 0.03, 0),
+                new Fertilizer(15,"EasyLife Ferro", 0, 0, 0, 0.1, 0),
+                new Fertilizer(16,"EasyLife Nitro", 1, 0, 0.65, 0, 0),
+                new Fertilizer(17,"EasyLife Kalium", 0, 0, 0.4, 0, 0),
+                new Fertilizer(18,"Microbe-Lift Plants Fe", 0, 0, 0, 0.02, 0),
+                new Fertilizer(19,"Microbe-Lift Plants N", 1, 0, 0, 0, 0),
+                new Fertilizer(20,"Microbe-Lift Plants P", 0, 0.01, 0, 0, 0),
+                new Fertilizer(21,"Microbe-Lift Plants K", 0, 0, 1, 0, 0),
+                new Fertilizer(22,"Microbe-Lift Plants NPK", 0.086, 0.02, 0.268, 0, 0.02)
         );
     }
 

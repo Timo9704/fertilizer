@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,10 +32,14 @@ public class AppController {
     @Autowired
     DoseMixerService doseMixerService;
 
+    private static final Logger logger = LogManager.getLogger(AppController.class);
+
+    private int requestCounter = 0;
 
     @GetMapping(value = "/getAllFertilizer")
     public ResponseEntity getAllFertilizer(){
         fertilizerService.init();
+        logger.info("Request counter: " + ++requestCounter);
         return ResponseEntity.ok(fertilizerService.getAllFertilizers());
     }
 

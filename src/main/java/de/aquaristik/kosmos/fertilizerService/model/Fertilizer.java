@@ -1,5 +1,9 @@
 package de.aquaristik.kosmos.fertilizerService.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class Fertilizer {
 
     private int id;
@@ -54,6 +58,7 @@ public class Fertilizer {
     public void setDosage(double dosage) {
         this.dosage = dosage;
     }
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public void setDosageModfiy(double dosage) {
         this.nitrate = nitrate * dosage;
@@ -75,10 +80,10 @@ public class Fertilizer {
     }
 
     public void calculateForAquarium(int liter) {
-        nitrate = Math.round(((nitrate * 100) / liter) * 100.0) / 100.0;
-        phosphate = Math.round(((phosphate * 100) / liter) * 100.0) / 100.0;
-        potassium = Math.round(((potassium * 100) / liter) * 100.0) / 100.0;
-        iron = Math.round(((iron * 100) / liter) * 100.0) / 100.0;
+        nitrate = new BigDecimal((((nitrate * 100) / liter) * 100.0) / 100).setScale(3, RoundingMode.HALF_UP).doubleValue();
+        phosphate = new BigDecimal((((phosphate * 100) / liter) * 100.0) / 100).setScale(3, RoundingMode.HALF_UP).doubleValue();
+        potassium = new BigDecimal((((potassium * 100) / liter) * 100.0) / 100).setScale(3, RoundingMode.HALF_UP).doubleValue();
+        iron = new BigDecimal((((iron * 100) / liter) * 100.0) / 100).setScale(3, RoundingMode.HALF_UP).doubleValue();
     }
 
     public void calculateForAquariumPrecise(int liter) {
