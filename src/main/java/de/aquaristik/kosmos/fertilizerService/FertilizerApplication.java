@@ -2,9 +2,11 @@ package de.aquaristik.kosmos.fertilizerService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-
-/*@SpringBootApplication
+//Tomcat-Runner
+@SpringBootApplication
 public class FertilizerApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
@@ -16,9 +18,9 @@ public class FertilizerApplication extends SpringBootServletInitializer {
 		return builder.sources(FertilizerApplication.class);
 	}
 
-}*/
-
-@SpringBootApplication
+}
+//Local-Runner
+/*@SpringBootApplication
 public class FertilizerApplication{
 
 	public static void main(String[] args) {
@@ -26,4 +28,4 @@ public class FertilizerApplication{
 
 	}
 
-}
+}*/
