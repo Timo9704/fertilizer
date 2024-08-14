@@ -11,6 +11,8 @@ public class FertilizerService {
 
     private List<Fertilizer> fertilizers;
 
+    //Rechne von z.B. 2m auf 50L erst auf 100L und dann von 2ml auf 100L auf 1ml je 100L
+
     public void init(){
         fertilizers = Arrays.asList(
                 new Fertilizer(0,"Greenscaping NPK Power", 0.62, 0.035, 0.309, 0, 0.028),
@@ -27,20 +29,21 @@ public class FertilizerService {
                 new Fertilizer(11,"AquaRebell Makro Basic Kalium", 0, 0, 0.025, 0, 0),
                 new Fertilizer(12,"AquaRebell Makro Basic Estimative Index", 0.368, 0.068, 0.28, 0, 0.01),
                 new Fertilizer(13,"AquaRebell Mikro Spezial Flowgrow", 0, 0, 0.006, 0.041, 0.01),
-                new Fertilizer(14,"Masterline 1", 0, 0, 0, 0.027, 0),
-                new Fertilizer(15,"Masterline 2", 0.36, 0.06, 0.036, 0, 0),
-                new Fertilizer(16,"Masterline Nitrate", 0.3, 0, 0.189, 0, 0),
-                new Fertilizer(17,"Masterline Phosphate", 0, 0.15, 0.06, 0, 0),
-                new Fertilizer(18,"Masterline Potassium", 0, 0, 0.3, 0, 0),
-                new Fertilizer(19,"Masterline Iron", 0, 0, 0, 0.03, 0),
-                new Fertilizer(20,"EasyLife Ferro", 0, 0, 0, 0.1, 0),
-                new Fertilizer(21,"EasyLife Nitro", 1, 0, 0.65, 0, 0),
-                new Fertilizer(22,"EasyLife Kalium", 0, 0, 0.4, 0, 0),
-                new Fertilizer(23,"Microbe-Lift Plants Fe", 0, 0, 0, 0.02, 0),
-                new Fertilizer(24,"Microbe-Lift Plants N", 1, 0, 0, 0, 0),
-                new Fertilizer(25,"Microbe-Lift Plants P", 0, 0.01, 0, 0, 0),
-                new Fertilizer(26,"Microbe-Lift Plants K", 0, 0, 1, 0, 0),
-                new Fertilizer(27,"Microbe-Lift Plants NPK", 0.086, 0.02, 0.268, 0, 0.02)
+                new Fertilizer(14,"AquaRebell Advanced GH Boost N", 0.75, 0, 0, 0, 0.135),
+                new Fertilizer(15,"Masterline 1", 0, 0, 0, 0.027, 0),
+                new Fertilizer(16,"Masterline 2", 0.36, 0.06, 0.036, 0, 0),
+                new Fertilizer(17,"Masterline Nitrate", 0.3, 0, 0.189, 0, 0),
+                new Fertilizer(18,"Masterline Phosphate", 0, 0.15, 0.06, 0, 0),
+                new Fertilizer(19,"Masterline Potassium", 0, 0, 0.3, 0, 0),
+                new Fertilizer(20,"Masterline Iron", 0, 0, 0, 0.03, 0),
+                new Fertilizer(21,"EasyLife Ferro", 0, 0, 0, 0.1, 0),
+                new Fertilizer(22,"EasyLife Nitro", 1, 0, 0.65, 0, 0),
+                new Fertilizer(23,"EasyLife Kalium", 0, 0, 0.4, 0, 0),
+                new Fertilizer(24,"Microbe-Lift Plants Fe", 0, 0, 0, 0.02, 0),
+                new Fertilizer(25,"Microbe-Lift Plants N", 1, 0, 0, 0, 0),
+                new Fertilizer(26,"Microbe-Lift Plants P", 0, 0.01, 0, 0, 0),
+                new Fertilizer(27,"Microbe-Lift Plants K", 0, 0, 1, 0, 0),
+                new Fertilizer(28,"Microbe-Lift Plants NPK", 0.086, 0.02, 0.268, 0, 0.02)
         );
     }
 
